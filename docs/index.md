@@ -10,6 +10,8 @@ Read the [syllabus](syllabus.md).
 | ---- | ---------- | ------------- | ------ |
 | 1    | Tue 30 Jan | Overview      |        |
 |      | Thu 1 Feb  | Discussion    |        |
-| ---- | ---------- | ------------- | ------ |
-| 2    |            |               |        |
+| 2    | Tue 6      |               |        |
+|      | Tue 8      |               |        |
+| 3    | Tue 13     |               |        |
+|      | Tue 15     |               |        |
 
