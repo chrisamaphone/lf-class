@@ -31,11 +31,16 @@ Each week consists of two days of classes.
 * At the end of DAY 1, an exercise or two will be assigned, which participants should try to complete before DAY 2.
 * DAY 2 will be dedicated to revisiting the exercises and discussing them. Participants are invited to show their solutions. Possibly more lecture and demonstration will follow, but in a less rigid/more improvised manner.
 
+### Zulip
+
+The course will use [Zulip](https://zulip.com/) for announcements and discussion outside of synchronous classtime.
+
 ### Resources
 
 * [The Twelf Wiki](http://twelf.org/wiki/Main_Page)
 * Frank Pfenning’s draft book on [Computation and
   Deduction](https://cs.mcgill.ca/~bpientka/courses/comp523-08/cd.pdf)
+
 
 
 

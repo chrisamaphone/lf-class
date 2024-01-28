@@ -18,3 +18,21 @@ Read the [syllabus](syllabus.md).
 |      | Thu 22     | Discussion    |        |
 | 5    | Tue 27     | Participant Demos |   |
 |      | Thu 29     | Participant Demos | |
+
+
+## FAQ
+
+# What is this?
+"CM 500: Logical Frameworks" is a free, 5-week course by [Chris
+Martens](https://khoury.northeastern.edu/~cmartens).
+The course is currently designed for twice-per-week synchronous
+sessions on Zoom.
+
+# How do I sign up?
+
+The Jan--Feb iteration is already underway and closed to new registrations.
+However, if it is successful, there may be future such classes.
+To be notified, sign up for [the mailing
+list](https://gaggle.email/join/cm-special-topics@gaggle.email).
+
+
