@@ -8,7 +8,7 @@ Read the [syllabus](syllabus.md).
 
 | Week | Date       | Topic         |        |
 | ---- | ---------- | ------------- | ------ |
-| 1    | Tue 30 Jan | Overview      |        |
+| 1    | Tue 30 Jan | [Overview](lec1.md)      |        |
 |      | Thu 1 Feb  | Discussion    |        |
 | 2    | Tue 6      | LF Type Theory |        |
 |      | Thu 8      | Discussion    |        |
