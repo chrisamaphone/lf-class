@@ -10,8 +10,11 @@ Read the [syllabus](syllabus.md).
 | ---- | ---------- | ------------- | ------ |
 | 1    | Tue 30 Jan | Overview      |        |
 |      | Thu 1 Feb  | Discussion    |        |
-| 2    | Tue 6      |               |        |
-|      | Tue 8      |               |        |
-| 3    | Tue 13     |               |        |
-|      | Tue 15     |               |        |
-
+| 2    | Tue 6      | LF Type Theory |        |
+|      | Thu 8      | Discussion    |        |
+| 3    | Tue 13     | Higher-Order Abstract Syntax |        |
+|      | Thu 15     | Discussion    |        |
+| 4    | Tue 20     | Canonical Forms/Adequacy | |
+|      | Thu 22     | Discussion    |        |
+| 5    | Tue 27     | Participant Demos |   |
+|      | Thu 29     | Participant Demos | |
