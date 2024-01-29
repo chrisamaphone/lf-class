@@ -10,7 +10,7 @@
 To be added.
 
 ## Exercises
-* Install Twelf.
+* [Download Twelf](http://twelf.org/wiki/Download).
 * Run the example from lecture.
 * Prove the other direction of the lemma (to be added).
 
