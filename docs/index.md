@@ -6,7 +6,7 @@ Read the [syllabus](syllabus.md).
 
 ## Schedule for 2024 Jan 30 - Feb 29
 
-| Week | Date       | Topic         |        |
+| Week | Date       | Topic         | Code   |
 | ---- | ---------- | ------------- | ------ |
 | 1    | Tue 30 Jan | [Overview](lec1.md)      |        |
 |      | Thu 1 Feb  | Discussion    |        |
