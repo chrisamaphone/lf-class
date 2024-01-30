@@ -2,7 +2,7 @@
 
 [Slides](https://docs.google.com/presentation/d/1sWbTAZSg1UvhU07Sst90j_tL9nY7AsYiG5APIv0XunM/edit?usp=sharing)
 
-[Code](https://github.com/chrisamaphone/lf-class/blob/main/code/nat-even2.lf)
+[Code](https://github.com/chrisamaphone/lf-class/blob/main/code/nat-even2.elf)
 
 ## Lecture plan
 
