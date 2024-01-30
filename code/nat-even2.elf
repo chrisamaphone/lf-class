@@ -1,0 +1,68 @@
+% Two definitions of "even", and a proof that they're the same.
+
+nat : type.
+z : nat.
+s : nat -> nat.
+% bogus : nat.
+
+%name nat N.
+
+even : nat -> type.
+even/z : even z.
+even/s : even (s (s N)) <- even N.
+
+%solve - : even (s (s (s (s (s (s z)))))).
+
+even2 : nat -> type.
+odd : nat -> type.
+even2/z : even2 z.
+even2/s : even2 (s N) <- odd N.
+
+odd/s : odd (s N) <- even2 N.
+
+%solve - : even2 (s (s (s (s (s (s z)))))).
+
+% even implies even2
+even-implies-even2
+ : even N -> even2 N -> type.
+%mode even-implies-even2 +X1 -X2.
+
+even-implies-even2/z
+ : even-implies-even2 even/z even2/z.
+
+even-implies-even2/s
+ : even-implies-even2
+      (even/s EvenPredPred)
+      (even2/s (odd/s Even2PredPred))
+    <- even-implies-even2 EvenPredPred Even2PredPred.
+
+%worlds () (even-implies-even2 _ _).
+%total D (even-implies-even2 D _).
+
+
+%%%% EXERCISE 1: Prove the other direction.
+
+%%%% EXERCISE 2:
+% Add a new constant "bogus : nat." to the top of the file,
+% right after the case for successor (s).
+% What happens? Why?
+% Now add it to the bottom of the file. What happens?
+
+%%%% EXERCISE 3 (BONUS): 
+% Prove that every nat is even or odd.
+% Here's some starter code.
+
+even-or-odd : nat -> type.
+eo/e : even-or-odd N <- even2 N.
+eo/o : even-or-odd N <- odd N.
+
+% Prove the following lemma:
+eo-succ : even-or-odd N -> even-or-odd (s N) -> type.
+
+% Then prove the main theorem.
+every-nat-eo : {N:nat} even-or-odd N -> type.
+
+%%%% EXERCISE 3.5 (BONUS):
+% Why did we have to use the lemma? 
+% What happens if we try to do the proof without it?
+
