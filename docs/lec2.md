@@ -9,7 +9,7 @@
 * Datatype encodings and (informal) adequacy
 
 ## Exercises
-* Come up with a second proof that (node (node leaf leaf) (node leaf leaf))
+* Come up with a second proof that `(node (node leaf leaf) (node leaf leaf))`
   is balanced.
 * Come up with both an extrinsic and intrinsic encoding for AVL trees. Show
   that the extrinsic encoding is not adequate, and that the intrinsic one
