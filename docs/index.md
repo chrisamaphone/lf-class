@@ -10,7 +10,7 @@ Read the [syllabus](syllabus.md).
 | ---- | ---------- | ------------- | ------ |
 | 1    | Tue 30 Jan | [Overview](lec1.md)      |        |
 |      | Thu 1 Feb  | Discussion    |        |
-| 2    | Tue 6      | LF Type Theory |        |
+| 2    | Tue 6      | [LF Type Theory](lec2.md) |        |
 |      | Thu 8      | Discussion    |        |
 | 3    | Tue 13     | Higher-Order Abstract Syntax |        |
 |      | Thu 15     | Discussion    |        |
