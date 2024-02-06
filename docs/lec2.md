@@ -20,4 +20,6 @@
 
 ## Further reading
 * [Computation and Deduction](https://cs.mcgill.ca/~bpientka/courses/comp523-08/cd.pdf) Chapter 3 (Formalization in a Logical Framework)
-
+* [Church and Curry: Combining Intrinsic and Extrinsic
+  Typing](https://www.cs.cmu.edu/~fp/papers/andrews08.pdf), by Frank
+  Pfenning
