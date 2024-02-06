@@ -1,0 +1,76 @@
+nat : type.
+z : nat.
+s : nat -> nat.
+%freeze nat.
+%name nat N.
+
+max : nat -> nat -> nat -> type.
+%mode max +N1 +N2 -N3.
+
+max/z1 : max z N N.
+max/z2 : max N z N.
+max/s  : max N M P -> max (s N) (s M) (s P).
+
+%worlds () (max _ _ _).
+%total [N1 N2] (max N1 N2 _).
+
+tree : type.
+leaf : tree.
+node : tree -> tree -> tree.
+%freeze tree.
+%name tree T.
+
+height : tree -> nat -> type.
+%mode height +T -N.
+
+height/leaf : height leaf z.
+height/node
+  : height (node L R) (s H)
+    <- height L HL
+    <- height R HR
+    <- max HL HR H.
+
+%worlds () (height _ _).
+%total T (height T _).
+
+balanced : tree -> type.
+balanced/leaf : balanced leaf.
+balanced/node
+  : balanced (node L R)
+    <- height L H
+    <- height R H.
+
+% %solve - : balanced (node leaf (node leaf leaf)).
+
+tree1 : tree = node leaf leaf.
+%solve - : balanced tree1.
+%solve - : balanced (node tree1 tree1).
+
+sol1 = balanced/node (height/node max/z1 height/leaf height/leaf)
+        (height/node max/z1 height/leaf height/leaf).
+
+
+% intrinsic encoding
+bbt : nat -> type.
+bLeaf : bbt z.
+bNode : bbt N -> bbt N -> bbt (s N).
+
+%solve tree1 : bbt (s (s (s z))).
+
+eqTree : bbt N -> bbt N -> type.
+%mode eqTree +T1 +T2.
+
+% This doesn't work! :O
+% eqTree/i : eqTree T T.
+
+eqTree/leaf : eqTree bLeaf bLeaf.
+eqTree/node : eqTree (bNode L1 R1) (bNode L2 R2)
+               <- eqTree L1 L2
+               <- eqTree R1 R2.
+
+%worlds () (eqTree _ _ ).
+%total [T1 T2] (eqTree T1 T2).
+
+% AVL trees: at most 1 different in height
+
+
