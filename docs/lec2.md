@@ -1,7 +1,7 @@
 # Lecture 2: LF Type Theory
 
 
-[Code](https://github.com/chrisamaphone/lf-class/blob/main/code/nat-even2.elf)
+[Code](https://github.com/chrisamaphone/lf-class/blob/main/code/data.elf)
 
 ## Lecture plan
 
