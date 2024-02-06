@@ -19,6 +19,9 @@
   functions to represent? What would the advantages/disadvantages be?
 
 ## Further reading
+* [A Framework for Defining
+  Logics](https://homepages.inf.ed.ac.uk/gdp/publications/Framework_Def_Log.pdf),
+  Harper, Honsell, and Plotkin. The original LF paper.
 * [Computation and Deduction](https://cs.mcgill.ca/~bpientka/courses/comp523-08/cd.pdf) Chapter 3 (Formalization in a Logical Framework)
 * [Church and Curry: Combining Intrinsic and Extrinsic
   Typing](https://www.cs.cmu.edu/~fp/papers/andrews08.pdf), by Frank
