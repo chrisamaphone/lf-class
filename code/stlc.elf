@@ -1,0 +1,138 @@
+% Lecture plan:
+% - Show inference rules for STLC
+% - Show encoding (follow this file)
+% - Give LF typing rule for lambda
+% - Talk about adequacy and HOAS
+
+tp : type.
+unit : tp.
+arrow : tp -> tp -> tp.
+
+tm : type.
+empty : tm.
+app : tm -> tm -> tm.
+lam : tp -> (tm -> tm) -> tm.
+
+% Examples
+ex0 = [x] app x empty.
+%abbrev ex1 = [x] app x empty.
+ex2 = lam (arrow unit unit) ([x] app x empty).
+ex3 = lam (arrow unit unit) ex0.
+%abbrev ex3 = lam (arrow unit unit) ex1.
+%abbrev ex4 = lam unit ([x] empty).
+ex5 = app ex3 ex4.
+
+%worlds () (tp).
+% Below fails:
+% %worlds () (tm).
+
+%block var : block {x:tm}.
+%worlds (var) (tm).
+
+% Typing judgments
+of : tm -> tp -> type.
+%mode of +M -T.
+of-empty : of empty unit.
+of-app : of (app F M) T2
+          <- of F (arrow T1 T2)
+          <- of M T1.
+of-lam : of (lam T1 ([x] M x)) (arrow T1 T2)
+          <- ({x:tm} of x T1 -> of (M x) T2).
+
+%block bind : some {t:tp} block {x:tm} {d:of x t}.
+%worlds (bind) (of _ _).
+
+% beta reduction
+step : tm -> tm -> type.
+%mode step +X1 -X2.
+step-app-1 : step (app E1 E2) (app E1' E2)
+              <- step E1 E1'.
+step-app-2 : step (app E1 E2) (app E1 E2')
+%              <- value E1
+              <- step E2 E2'.
+step-app-beta
+  : step (app (lam T2 ([x] E x)) E2) (E E2).
+    % <- value E2.
+
+%% add reduction under binders
+step-lam
+  : step (lam T [x] E x) (lam T [x] E' x)
+    <- ({x:tm} step (E x) (E' x)).
+
+%worlds (var) (step _ _).
+
+% subject reduction
+sr : step E E' -> of E T -> of E' T -> type.
+%mode sr +Dstep +Dof -Dof'.
+
+sr-app-1  
+  : sr
+      (step-app-1 (DstepE1 : step E1 E1'))
+      (of-app (DofE2 : of E2 T2)
+              (DofE1 : of E1 (arrow T2 T)))
+      (of-app DofE2 DofE1')
+    <- sr DstepE1 DofE1
+        (DofE1' : of E1' (arrow T2 T)).
+
+sr-app-2
+  : sr
+      (step-app-2 (DstepE2 : step E2 E2'))
+      (of-app (DofE2 : of E2 T2)
+              (DofE1 : of E1 (arrow T2 T)))
+      (of-app DofE2' DofE1)
+    <- sr DstepE2 DofE2 DofE2'.
+
+sr-app-beta
+  : sr
+      (step-app-beta
+        : step (app (lam T2 [x] E x) E2) (E E2))
+      (of-app (DofE2 : of E2 T2)
+              (of-lam (([x] [dx] DofE x dx)
+                        : {x:tm} {dx:of x T2} of (E x) T)))
+      (DofE E2 DofE2).
+
+sr-lam
+  : sr
+      (step-lam (DstepE : {x} step (E x) (E' x)))
+      (of-lam (DofE : {x} {dx:of x T2} of (E x) T))
+      (of-lam DofE')
+    <- ({x} {d:of x T2} sr (DstepE x) (DofE x d)
+          (DofE' x d : of (E' x) T)).
+                  
+%worlds (bind) (sr _ _ _).
+%total D (sr D _ _).
+
+%%%% Exercises
+% Exercise 1:
+% - Add LF encodings for product types, pairs, and a "split" elim rule,
+%   as follows. Add all relevant judgment and proof cases.
+%
+%   T ::= ... | T x T
+%   E ::= ... | <E, E> | split E as x,y. E 
+%
+%   e1 : T1           e2 : T2
+%   -------------------------- of-pair
+%       <e1,e2> : T1 x T2
+%
+%   e : T1 x T2     x:T1, y:T2 |- e' : T
+%   ------------------------------------- of-split
+%       e' : T
+%
+% Beta rules:
+%     e1 -> e1' ------ <e1,e2> -> <e1',e2>
+%     e2 -> e2' ------ <e1,e2> -> <e1,e2'>
+%               ------ split <e1,e2> as x,y. E -> [e1/x][e2/y] E
+
+
+% Exercise 2:
+% - Create an intrinsic encoding of the STLC.
+%   Declare blocks and worlds for every type family.
+
+
+% Exercise 3:
+% - In class, we talked about how adequacy with HOAS depends on LF
+% functions not being allowed to case-analyze their arguments. What goes
+% wrong if we allow this? Construct an example, if you can.
+
+
+
