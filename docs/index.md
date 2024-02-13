@@ -12,7 +12,7 @@ Read the [syllabus](syllabus.md).
 |      | Thu 1 Feb  | Discussion    |        |
 | 2    | Tue 6      | [LF Type Theory](lec2.md) |        |
 |      | Thu 8      | Discussion    |        |
-| 3    | Tue 13     | Higher-Order Abstract Syntax |        |
+| 3    | Tue 13     | [Higher-Order Abstract Syntax](lec3.md) |        |
 |      | Thu 15     | Discussion    |        |
 | 4    | Tue 20     | Canonical Forms/Adequacy | |
 |      | Thu 22     | Discussion    |        |
