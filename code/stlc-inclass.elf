@@ -1,0 +1,59 @@
+% Lecture plan:
+% - OL: STLC intro
+% - LF: STLC syntax and typing
+% - LF type theory: lambda
+% - LF: Blocks and worlds
+% - OL: Beta reduction
+% - LF: Beta reduction, SR proof
+
+tp : type.
+unit : tp.
+arr : tp -> tp -> tp.
+
+%worlds () (tp).
+
+% arr unit unit : tp
+
+exp : type.
+emp : exp.
+app : exp -> exp -> exp.
+lam : tp -> (exp -> exp) -> exp.
+
+% Examples
+%abbrev ex0 = [x] app x emp.
+ex2 = lam (arr unit unit) ([x] app x emp).
+ex3 = lam (arr unit unit) ex0.
+%abbrev ex4 = lam unit ([x] emp).
+ex5 = app ex3 ex4.
+
+%abbrev omega = lam unit ([x] app x x).
+
+%block var : block {x:exp}.
+%worlds (var) (exp).
+
+
+of : exp -> tp -> type.
+
+of-emp : of emp unit.
+
+of-app : of (app E1 E2) T
+          <- of E1 (arr T2 T)
+          <- of E2 T2.
+
+of-lam
+  : of (lam T ([x] E x)) (arr T T')
+    % x : T |- E : T'
+  <- ({x:exp} of x T 
+           -> of (E x) T').
+
+
+%block bind : some {t:tp} block {x:exp} {dx:of x t}.
+% %worlds (bind) (of _ _).
+%worlds (bind) (of _ _).
+
+% of-lam : of (lam T ([x] E x)) (arr T T')
+%          <- ({x:exp} of x T -> of (E x) T').
+
+
+
+
