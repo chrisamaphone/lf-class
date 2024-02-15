@@ -51,8 +51,74 @@ of-lam
 % %worlds (bind) (of _ _).
 %worlds (bind) (of _ _).
 
-% of-lam : of (lam T ([x] E x)) (arr T T')
-%          <- ({x:exp} of x T -> of (E x) T').
+value : exp -> type.
+%mode value +X.
+
+value-empty : value emp.
+value-lam : value (lam T ([x] E x)).
+
+%worlds () (value _).
+
+% step E E' means E steps to E'
+step : exp -> exp -> type.
+%mode step +X1 -X2.
+
+step-app-1
+  : step (app E1 E2) (app E1' E2)
+  <- step E1 E1'.
+
+step-app-2
+  : step (app E1 E2) (app E1 E2')
+  <- value E1
+  <- step E2 E2'.
+
+step-app-beta
+  : step (app (lam T [x] E x) E2) (E E2)
+  <- value E2.
+
+
+% Preservation: if e:T and e->e', then e':T
+preserv : step E E' -> of E T -> of E' T -> type.
+%mode preserv +X1 +X2 -X3.
+% Exercise: can you do it with +--?
+
+preserv-app-1
+  : preserv
+      (step-app-1 (DstepF : step F F')
+        : step (app F P) (app F' P))
+      (of-app 
+          (DofP : of P TP)
+          (DofF : of F (arr TP TR))
+        : of (app F P) TR)
+      (of-app DofP DofF')
+    <- preserv DstepF DofF (DofF' : of F' (arr TP TR)).
+
+preserv-app-2
+  : preserv
+      (step-app-2
+          (DstepP : step P P')
+          (DvalF : value F))
+      (of-app
+          (DofP : of P TP)
+          (DofF : of F (arr TP TR)))
+      (of-app DofP' DofF)
+    <- preserv DstepP DofP (DofP' : of P' TP).
+
+preserv-app-beta
+  : preserv
+      (step-app-beta
+          (DvalueP : value P)
+        : step (app (lam TP BF) P) (BF P))
+      (of-app
+          (DofP : of P TP)
+          (of-lam 
+            (([x] [dx] DofBF x dx)
+              : {x:exp} of x TP -> of (BF x) TR)
+              ))
+      (DofBF P DofP).
+
+%worlds () (preserv _ _ _).
+%total D (preserv D _ _).
 
 
 
