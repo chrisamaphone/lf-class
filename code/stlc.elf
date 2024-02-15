@@ -116,9 +116,9 @@ sr-lam
 %
 %   e : T1 x T2     x:T1, y:T2 |- e' : T
 %   ------------------------------------- of-split
-%       e' : T
+%       split e as x,y. e' : T
 %
-% Beta rules:
+% Reduction rules:
 %     e1 -> e1' ------ <e1,e2> -> <e1',e2>
 %     e2 -> e2' ------ <e1,e2> -> <e1,e2'>
 %               ------ split <e1,e2> as x,y. E -> [e1/x][e2/y] E
