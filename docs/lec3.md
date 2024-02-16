@@ -9,15 +9,15 @@
 * Encoding: syntax and typing 
 * LF type theory: lambda; adequacy for HOAS
 * Encoding: %blocks and %worlds
-* OL: Reduction rules (weak head)
-* Encoding: reduction rules; sr proof
-* Encoding: add reduction under binders; update proof
+* OL: Step rules (weak head reduction)
+* Encoding: step rules; preserv proof
 
 ## Exercises
 * Add LF encodings for product types and pairs with a "split" elimination
-  form. Extend the relevant judgments and proofs.
-* Create an intrinsic encoding of STLC. Declare blocks and worlds for every
-  type family.
+  form. Extend the relevant judgments and proofs. (See code file for exact
+  inference rules.)
+* Create an intrinsic encoding of STLC, where expression syntax is indexed
+  by the type of the expression. Declare blocks and worlds for every type family.
 * In class, we talked about how adequacy with HOAS depends on LF functions
   not being allowed to case-analyze their arguments. What goes wrong if we
   allow this? Construct an example, if you can.
