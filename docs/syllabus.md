@@ -38,6 +38,7 @@ The course will use [Zulip](https://zulip.com/) for announcements and discussion
 ### Resources
 
 * [The Twelf Wiki](http://twelf.org/wiki/Main_Page)
+* [Run Twelf in your browser!](https://jcreedcmu.github.io/twelf-wasm/)
 * Frank Pfenning’s draft book on [Computation and
   Deduction](https://cs.mcgill.ca/~bpientka/courses/comp523-08/cd.pdf)
 
