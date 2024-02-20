@@ -1,0 +1,35 @@
+
+tp : type.
+unit : tp.
+arr : tp -> tp -> tp.
+
+exp : tp -> type.
+emp : exp unit.
+app : exp (arr TP TB) -> (exp TP -> exp TB).
+lam : (exp TP -> exp TR) -> exp (arr TP TR).
+
+%block var : some {t:tp} block {x:exp t}.
+%worlds (var) (exp _).
+
+of : exp T -> tp -> type.
+%mode of +X -T.
+of-obvious : of (E : exp T) T.
+
+%worlds () (of _ _).
+%total {} (of _ _).
+
+value : exp A -> type.
+value-emp : value emp.
+value-lam : value (lam E).
+
+step : exp T -> exp T -> type.
+
+step-app-1 : step (app E1 E2) (app E1' E2)
+              <- step E1 E1'.
+
+step-app-2 : step (app E1 E2) (app E1 E2')
+              <- value E1
+              <- step E2 E2'.
+
+step-app-beta : step (app (lam [x] E x) Arg) (E Arg).
+
