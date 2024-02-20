@@ -1,0 +1,222 @@
+% Lecture plan:
+% - OL: STLC intro
+% - LF: STLC syntax and typing
+% - LF type theory: lambda
+% - LF: Blocks and worlds
+% - OL: Beta reduction
+% - LF: Beta reduction, SR proof
+
+tp : type.
+unit : tp.
+arr : tp -> tp -> tp.
+prod : tp -> tp -> tp.
+
+%worlds () (tp).
+
+% arr unit unit : tp
+
+exp : type.
+emp : exp.
+app : exp -> exp -> exp.
+lam : tp -> (exp -> exp) -> exp.
+pair : exp -> exp -> exp.
+split : exp -> (exp -> exp -> exp) -> exp.
+
+% Examples
+%abbrev ex0 = [x] app x emp.
+ex2 = lam (arr unit unit) ([x] app x emp).
+ex3 = lam (arr unit unit) ex0.
+%abbrev ex4 = lam unit ([x] emp).
+ex5 = app ex3 ex4.
+
+%abbrev omega = lam unit ([x] app x x).
+
+%block var : block {x:exp}.
+%worlds (var) (exp).
+
+
+of : exp -> tp -> type.
+
+of-emp : of emp unit.
+
+of-app : of (app E1 E2) T
+          <- of E1 (arr T2 T)
+          <- of E2 T2.
+
+of-lam
+  : of (lam T ([x] E x)) (arr T T')
+    % x : T |- E : T'
+  <- ({x:exp} of x T 
+           -> of (E x) T').
+
+of-pair
+  : of (pair E1 E2) (prod T1 T2)
+  <- of E1 T1
+  <- of E2 T2.
+
+of-split
+  : of (split XY M) T
+  <- of XY (prod T1 T2)
+  % <- ({x:exp} {y:exp} of x T1 -> of y T2 -> of (M x y) T)
+  <- ({x:exp} of x T1 -> {y:exp} of y T2 -> of (M x y) T).
+
+% Pi x:exp. Pi dx:of x T1. Pi y:exp. Pi dy:of y T2. of ..
+
+%block bind : some {t:tp} block {x:exp} {dx:of x t}.
+% %block bind2 
+%  : some {t1:tp} {t2:tp} block {x:exp} {y:exp} {dx:of x t1} {dy:of y t2}.
+% %worlds (bind | bind2) (of _ _).
+%worlds (bind) (of _ _).
+
+value : exp -> type.
+%mode value +X.
+
+value-empty : value emp.
+value-lam : value (lam T ([x] E x)).
+value-pair : value (pair E1 E2)
+              <- value E1
+              <- value E2.
+
+%worlds () (value _).
+
+% step E E' means E steps to E'
+step : exp -> exp -> type.
+%mode step +X1 -X2.
+
+step-app-1
+  : step (app E1 E2) (app E1' E2)
+  <- step E1 E1'.
+
+step-app-2
+  : step (app E1 E2) (app E1 E2')
+  <- value E1
+  <- step E2 E2'.
+
+step-app-beta
+  : step (app (lam T [x] E x) E2) (E E2)
+  <- value E2.
+
+step-pair-1
+  : step (pair E1 E2) (pair E1' E2)
+  <- step E1 E1'.
+
+step-pair-2
+  : step (pair E1 E2) (pair E1 E2')
+  <- value E1
+  <- step E2 E2'.
+
+step-split-pair
+  : step (split E M) (split E' M)
+  <- step E E'.
+
+step-split-beta
+  : step (split (pair E1 E2) [x] [y] M x y) (M E1 E2)
+  <- value (pair E1 E2).
+
+% Preservation: if e->e' and e:T, then e':T
+preserv : step E E' -> of E T -> of E' T -> type.
+%mode preserv +X1 +X2 -X3.
+% Exercise: can you do it with +--?
+
+preserv-app-1
+  : preserv
+      (step-app-1 (DstepF : step F F')
+        : step (app F P) (app F' P))
+      (of-app 
+          (DofP : of P TP)
+          (DofF : of F (arr TP TR))
+        : of (app F P) TR)
+      (of-app DofP DofF')
+    <- preserv DstepF DofF (DofF' : of F' (arr TP TR)).
+
+preserv-app-2
+  : preserv
+      (step-app-2
+          (DstepP : step P P')
+          (DvalF : value F))
+      (of-app
+          (DofP : of P TP)
+          (DofF : of F (arr TP TR)))
+      (of-app DofP' DofF)
+    <- preserv DstepP DofP (DofP' : of P' TP).
+
+preserv-app-beta
+  : preserv
+      (step-app-beta
+          (DvalueP : value P)
+        : step (app (lam TP BF) P) (BF P))
+      (of-app
+          (DofP : of P TP)
+          (of-lam 
+            (([x] [dx] DofBF x dx)
+              : {x:exp} of x TP -> of (BF x) TR)
+              ))
+      (DofBF P DofP).
+
+preserv-split-pair
+  : preserv
+      (step-split-pair
+          (DstepE : step E E'))
+      (of-split Dbody (Dpair : of E (prod T1 T2)))
+      (of-split Dbody Dpair')
+  <- preserv DstepE Dpair (Dpair' : of E' (prod T1 T2)).
+
+%%%
+% preserv Step Typ =
+%   case (Step, Typ) of
+%     (step-split-pair DstepE, of-split Dbody Dpair)
+%       => of-split (preserv DstepE Dpair)
+
+preserv-split-beta
+  : preserv
+      (step-split-beta Dval 
+        : step (split (pair E1 E2) Body) (Body E1 E2))
+      (of-split
+          (Dbody : {x} of x T1 -> {y} of y T2 -> of (Body x y) T)
+          (of-pair 
+              (DofE2 : of E2 T2) 
+              (DofE1 : of E1 T1)))
+      (Dbody E1 DofE1 E2 DofE2).
+
+%worlds () (preserv _ _ _).
+%total D (preserv D _ _).
+
+
+%%%% Exercises: to work through on Tuesday, Feb 20
+% Exercise 1:
+% - Add LF encodings for product types, pairs, and a "split" elim rule,
+%   as follows. Add all relevant judgment and proof cases.
+%
+%   T ::= ... | T x T
+%   e ::= ... | <e, e> | split e as x,y. e 
+%
+%   e1 : T1           e2 : T2
+%   -------------------------- of-pair
+%       <e1,e2> : T1 x T2
+%
+%   e : T1 x T2     x:T1, y:T2 |- e' : T
+%   ------------------------------------- of-split
+%       split e as x,y. e' : T
+%
+% Step rules:
+%     e1 -> e1' ------ <e1,e2> -> <e1',e2>
+%     e2 -> e2' ------ <e1,e2> -> <e1,e2'>
+%               ------ split <e1,e2> as x,y. E -> [e1/x][e2/y] E
+
+
+% Exercise 2:
+% - Create an intrinsic encoding of the STLC.
+%   Declare blocks and worlds for every type family.
+
+
+% Exercise 3:
+% - In class, we talked about how adequacy with HOAS depends on LF
+% functions not being allowed to case-analyze their arguments. What goes
+% wrong if we allow this? Construct an example, if you can.
+
+% More if we finish these:
+% - Change step to reduce under binders. Consider what needs to change
+% about the encoding and the proof (preserv -> subject reduction).
+
+
+
