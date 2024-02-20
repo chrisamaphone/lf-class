@@ -13,9 +13,9 @@ Read the [syllabus](syllabus.md).
 | 2    | Tue 6      | [LF Type Theory](lec2.md) |        |
 |      | Thu 8      | Discussion    |        |
 | 3    | Tue 13     | [Higher-Order Abstract Syntax](lec3.md) |        |
-|      | Thu 15     | Discussion    |        |
-| 4    | Tue 20     | Canonical Forms/Adequacy | |
-|      | Thu 22     | Discussion    |        |
+|      | Thu 15     | [HOAS Part 2](lec3.md)    |        |
+| 4    | Tue 20     | [HOAS Part 3](lec4.md) | |
+|      | Thu 22     | Canonical Forms    |        |
 | 5    | Tue 27     | Participant Demos |   |
 |      | Thu 29     | Participant Demos | |
 
