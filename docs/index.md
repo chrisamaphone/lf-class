@@ -30,8 +30,9 @@ sessions on Zoom.
 
 ### How do I sign up?
 
-The Jan--Feb iteration is already underway and closed to new registrations.
-However, if it is successful, there may be future such classes.
+The Jan-Feb 2024 iteration is finished.
+However, there may be future iterations and/or related classes of a similar
+nature.
 To be notified, sign up for [the mailing
 list](https://gaggle.email/join/cm-special-topics@gaggle.email).
 
