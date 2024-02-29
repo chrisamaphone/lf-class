@@ -17,7 +17,8 @@ Read the [syllabus](syllabus.md).
 | 4    | Tue 20     | [HOAS Part 3](lec4.md) | |
 |      | Thu 22     | Canonical Forms    |        |
 | 5    | Tue 27     | Participant Demos |   |
-|      | Thu 29     | Participant Demos | |
+|      | Thu 29     | Participant Demos / [Closing
+remarks](https://docs.google.com/presentation/d/1o7Pk084vqwwmqzmdV1jprOfY_IQSEp4A5cjLDjgvwJc/edit?usp=sharing) | |
 
 
 ## FAQ
