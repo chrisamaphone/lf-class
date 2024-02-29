@@ -6,17 +6,17 @@ Read the [syllabus](syllabus.md).
 
 ## Schedule for 2024 Jan 30 - Feb 29
 
-| Week | Date       | Topic         | Code   |
-| ---- | ---------- | ------------- | ------ |
-| 1    | Tue 30 Jan | [Overview](lec1.md)      |        |
-|      | Thu 1 Feb  | Discussion    |        |
-| 2    | Tue 6      | [LF Type Theory](lec2.md) |        |
-|      | Thu 8      | Discussion    |        |
-| 3    | Tue 13     | [Higher-Order Abstract Syntax](lec3.md) |        |
-|      | Thu 15     | [HOAS Part 2](lec3.md)    |        |
-| 4    | Tue 20     | [HOAS Part 3](lec4.md) | |
-|      | Thu 22     | Canonical Forms    |        |
-| 5    | Tue 27     | Participant Demos |   |
+| Week | Date       | Topic         |
+| ---- | ---------- | ------------- |
+| 1    | Tue 30 Jan | [Overview](lec1.md)      |
+|      | Thu 1 Feb  | Discussion    |
+| 2    | Tue 6      | [LF Type Theory](lec2.md) |
+|      | Thu 8      | Discussion    |      
+| 3    | Tue 13     | [Higher-Order Abstract Syntax](lec3.md) |
+|      | Thu 15     | [HOAS Part 2](lec3.md)    |     
+| 4    | Tue 20     | [HOAS Part 3](lec4.md) | 
+|      | Thu 22     | Canonical Forms    |    
+| 5    | Tue 27     | Participant Demos | 
 |      | Thu 29     | Participant Demos / [Closing remarks](https://docs.google.com/presentation/d/1o7Pk084vqwwmqzmdV1jprOfY_IQSEp4A5cjLDjgvwJc/edit?usp=sharing) | |
 
 
